@@ -2,7 +2,7 @@
 
 import { Box, Button, Stack, TextField } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown from "react-markdown";
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -44,19 +44,28 @@ export default function Home() {
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
+      let accumulatedText = "";
+      const typingSpeed = 15;
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
+
         const text = decoder.decode(value, { stream: true });
-        setMessages((messages) => {
-          const lastMessage = messages[messages.length - 1];
-          const otherMessages = messages.slice(0, messages.length - 1);
-          return [
-            ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text },
-          ];
-        });
+        for (const char of text) {
+          accumulatedText += char;
+
+          setMessages((messages) => {
+            const lastMessage = messages[messages.length - 1];
+            const otherMessages = messages.slice(0, messages.length - 1);
+            return [
+              ...otherMessages,
+              { ...lastMessage, content: accumulatedText },
+            ];
+          });
+
+          await new Promise((resolve) => setTimeout(resolve, typingSpeed));
+        }
       }
     } catch (error) {
       console.error("Error:", error);
