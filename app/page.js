@@ -1,8 +1,9 @@
 "use client";
-
-import { Box, Button, Stack, TextField } from "@mui/material";
+import { Box, Button, Stack, TextField, Divider } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import SendIcon from '@mui/icons-material/Send';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -81,6 +82,11 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+  const clearChat = () => {
+    setMessages([]); 
+    setMessage("");  
+    setIsLoading(false); 
+    }
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
@@ -94,7 +100,6 @@ export default function Home() {
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
@@ -104,17 +109,39 @@ export default function Home() {
       width="100vw"
       height="100vh"
       display="flex"
-      flexDirection="column"
+      flexDirection="row"
       justifyContent="center"
-      alignItems="center"
-    >
+      alignItems="flex-end"
+    > 
+      <Stack
+      height="100vh"
+      width="40vw"
+      backgroundColor="white">
+        <Stack
+        height = "70vh"
+        >Feedback</Stack>
+        <Stack
+        height = "30vh"
+        >Languages</Stack>
+      </Stack>
+      <Divider
+        orientation="vertical" 
+        sx={{
+          borderRightWidth: '2px',
+          borderColor: 'gray',
+          borderStyle: 'dashed',
+        }}
+      />
       <Stack
         direction={"column"}
-        width="500px"
+        width="1000px"
         height="700px"
         border="3px solid black"
+        borderRadius={5}
         p={2}
         spacing={3}
+        marginRight={5}
+        marginLeft={5}
       >
         <Stack
           direction={"column"}
@@ -134,11 +161,11 @@ export default function Home() {
               <Box
                 bgcolor={
                   message.role === "assistant"
-                    ? "primary.main"
-                    : "secondary.main"
+                    ? "#5B99C2"
+                    : "#F9DBBA"
                 }
-                color="white"
-                borderRadius={16}
+                color="black"
+                borderRadius={5}
                 p={3}
               >
                 <ReactMarkdown>{message.content}</ReactMarkdown>
@@ -150,6 +177,8 @@ export default function Home() {
         <Stack direction={"row"} spacing={2}>
           <TextField
             label="Message"
+            color="secondary"
+            focused
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -162,8 +191,18 @@ export default function Home() {
             variant="contained"
             onClick={sendMessage}
             disabled={isLoading}
+            endIcon={<SendIcon />}
           >
             Send
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={clearChat}
+            disabled={isLoading}
+            endIcon={<DeleteIcon />}
+          >
+            Clear
           </Button>
         </Stack>
       </Stack>
