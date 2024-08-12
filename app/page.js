@@ -195,7 +195,7 @@ export default function Home() {
           mb: 2,
           "@media (max-width: 600px)": {
             width: "85%",
-            height: "500px",
+            height: "425px",
             p: 2,
             mt: 1,
             mb: 1,
@@ -347,7 +347,7 @@ export default function Home() {
           right: 10,
           zIndex: 1000,
           "@media (max-width: 600px)": {
-            bottom: 70,
+            bottom: 100,
             right: 35,
             fontSize: "0.75rem",
           },
