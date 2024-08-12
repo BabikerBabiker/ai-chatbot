@@ -171,8 +171,10 @@ export default function Home() {
         variant="h4"
         component="h1"
         sx={{
+          "@media (max-width: 600px)": {
+            mt: 8,
+        },
           mb: 2,
-          mt: 6,
           color: "#ffffff",
           fontWeight: "bold",
           textAlign: "center",
