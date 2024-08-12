@@ -347,8 +347,8 @@ export default function Home() {
           right: 10,
           zIndex: 1000,
           "@media (max-width: 600px)": {
-            bottom: 100,
-            right: 35,
+            bottom: 800,
+            right: 10,
             fontSize: "0.75rem",
           },
         }}
