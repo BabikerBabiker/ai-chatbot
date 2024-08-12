@@ -82,7 +82,6 @@ export default function Home() {
               ...otherMessages,
               { ...lastMessage, content: accumulatedText },
             ];
-            scrollToBottom();
             return updatedMessages;
           });
 
