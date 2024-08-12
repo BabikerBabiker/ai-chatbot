@@ -172,6 +172,7 @@ export default function Home() {
         component="h1"
         sx={{
           mb: 2,
+          mt: 6,
           color: "#ffffff",
           fontWeight: "bold",
           textAlign: "center",
