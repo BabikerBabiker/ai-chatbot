@@ -4,6 +4,12 @@
   margin: 0;
 }
 
+html, body {
+  overflow: hidden;
+  height: 100%;
+  margin: 0;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

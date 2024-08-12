@@ -28,6 +28,7 @@ export default function Home() {
   const [openFeedbackModal, setOpenFeedbackModal] = useState(false);
 
   useEffect(() => {
+    document.body.style.overflow = "hidden";
     const storedFeedback = localStorage.getItem("feedbackList");
     if (storedFeedback) {
       setFeedbackList(JSON.parse(storedFeedback));
