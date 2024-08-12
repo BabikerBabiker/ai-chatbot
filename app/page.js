@@ -105,7 +105,13 @@ export default function Home() {
   };
 
   const clearChat = () => {
-    setMessages([]);
+    setMessages((messages) => [
+      {
+        role: "assistant",
+        content:
+          "Hi! I'm the Headstarter support assistant. How can I help you today?",
+      },
+    ]);
     setMessage("");
     setIsLoading(false);
   };
@@ -155,8 +161,23 @@ export default function Home() {
           height: "100vh",
           p: 1,
         },
+        background: "linear-gradient(135deg, #2e2e2e, #7d7d7d, #2e2e2e)",
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
       }}
     >
+      <Typography
+        variant="h4"
+        component="h1"
+        sx={{
+          mb: 2,
+          color: "#ffffff",
+          fontWeight: "bold",
+          textAlign: "center",
+        }}
+      >
+        Headstarter Support Assistant
+      </Typography>
       <Stack
         direction="column"
         width="100%"
@@ -326,7 +347,7 @@ export default function Home() {
           right: 10,
           zIndex: 1000,
           "@media (max-width: 600px)": {
-            bottom: 120,
+            bottom: 70,
             right: 35,
             fontSize: "0.75rem",
           },
